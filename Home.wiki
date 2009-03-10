@@ -1,1 +1,58 @@
-== The ChemAxiomProp Ontology ==ChemAxiomProp is an ontology of chemical and materials properties and a member of the ChemAxiom family of ontologies for the chemisty domain. It contains a list of over 150 properties togethe with definitions of their symbols (where available and codifiable) and typing information, which, when used in combination with a reasoner can be used to sert the properties under multiple superclasses, if desired. This allows the typing of resources, even if this is done retrospectively.=== Modeling Example ===To give an example of the use of reasoners for the typing of resources, let's consider the generic class "CohesiveProperties":{{{:CohesiveProperties      a       owl:Class ;      rdfs:comment "The cohesive properties of a polymer are expressed quantitatively in the cohesive energy. Cohesive properties represent the various intermolecular forces that hold solids and liquids together."@en ;      rdfs:label "Cohesive properties"@en ;      rdfs:subClassOf :ThermophysicalProperties ;      owl:equivalentClass              [ a       owl:Class ;                owl:intersectionOf (:Property [ a       owl:Restriction ;                            owl:onProperty :hasType ;                            owl:someValuesFrom :CohesiveProperties                          ])              ] .}}}The class is a defined class: in the above example it is modeled such, that the anonymous class formed by the intersection of the classes "Property" and "hasType some CohesiveProperty" is the considered to be the equivalent class of "CohesiveProperties".Now let's consider the class "CohesiveEnergyDensity":{{{:CohesiveEnergyDensity      a       owl:Class ;      rdfs:comment "The cohesive energy density if the cohesive energy of a condensed phase per volume element{@en}."^^xsd:string ;      rdfs:label "Cohesive energy density"@en ;      rdfs:subClassOf :NamedProperty ;      rdfs:subClassOf              [ a       owl:Restriction ;                owl:hasValue "e<sub>coh</sub>"^^xsd:string ;                owl:onProperty :hasSymbol              ] ;      rdfs:subClassOf              [ a       owl:Restriction ;                owl:onProperty :hasType ;                owl:someValuesFrom :PolymerProperty              ] ;      rdfs:subClassOf              [ a       owl:Restriction ;                owl:onProperty :hasType ;                owl:someValuesFrom :CohesiveProperties              ] .}}}This class carries an axiom that "CohesiveEnergyDensity" is a subclass of "hasType some CohesiveProperties" and we have asserted that it is a "Property" as it is an asserted subclass of "NamedProperty". Hence the class is a member of the intersection class we defined as the equivalent of CohesievProperties and therefore a reasoner will be able to infer, that "CohesiveEnergyDensity" is not only a subclass of "NamedProperty" but also of "CohesiveProperties".=== Licence ===This ontology is licenced under GPL v.3 licence.**Please note that other licence forms are also available on request.**
+== The ChemAxiomProp Ontology ==
+
+ChemAxiomProp is an ontology of chemical and materials properties and a member of the ChemAxiom family of ontologies for the chemisty domain. It contains a list of over 150 properties togethe with definitions of their symbols (where available and codifiable) and typing information, which, when used in combination with a reasoner can be used to sert the properties under multiple superclasses, if desired. This allows the typing of resources, even if this is done retrospectively. For questions, discussion and feedback, please use the [[http://groups.google.com/group/chemaxiom|ChemAxiom Google Group]]. To become involved in the development of these ontologies, please email chemaxiom at googlemail dot com.
+
+=== Modeling Example ===
+To give an example of the use of reasoners for the typing of resources, let's consider the generic class "CohesiveProperties":
+
+{{{
+
+:CohesiveProperties
+      a       owl:Class ;
+      rdfs:comment "The cohesive properties of a polymer are expressed quantitatively in the cohesive energy. Cohesive properties represent the various intermolecular forces that hold solids and liquids together."@en ;
+      rdfs:label "Cohesive properties"@en ;
+      rdfs:subClassOf :ThermophysicalProperties ;
+      owl:equivalentClass
+              [ a       owl:Class ;
+                owl:intersectionOf (:Property [ a       owl:Restriction ;
+                            owl:onProperty :hasType ;
+                            owl:someValuesFrom :CohesiveProperties
+                          ])
+              ] .
+}}}
+
+The class is a defined class: in the above example it is modeled such, that the anonymous class formed by the intersection of the classes "Property" and "hasType some CohesiveProperty" is the considered to be the equivalent class of "CohesiveProperties".
+
+Now let's consider the class "CohesiveEnergyDensity":
+
+{{{
+
+:CohesiveEnergyDensity
+      a       owl:Class ;
+      rdfs:comment "The cohesive energy density if the cohesive energy of a condensed phase per volume element{@en}."^^xsd:string ;
+      rdfs:label "Cohesive energy density"@en ;
+      rdfs:subClassOf :NamedProperty ;
+      rdfs:subClassOf
+              [ a       owl:Restriction ;
+                owl:hasValue "e<sub>coh</sub>"^^xsd:string ;
+                owl:onProperty :hasSymbol
+              ] ;
+      rdfs:subClassOf
+              [ a       owl:Restriction ;
+                owl:onProperty :hasType ;
+                owl:someValuesFrom :PolymerProperty
+              ] ;
+      rdfs:subClassOf
+              [ a       owl:Restriction ;
+                owl:onProperty :hasType ;
+                owl:someValuesFrom :CohesiveProperties
+              ] .
+}}}
+
+This class carries an axiom that "CohesiveEnergyDensity" is a subclass of "hasType some CohesiveProperties" and we have asserted that it is a "Property" as it is an asserted subclass of "NamedProperty". Hence the class is a member of the intersection class we defined as the equivalent of CohesievProperties and therefore a reasoner will be able to infer, that "CohesiveEnergyDensity" is not only a subclass of "NamedProperty" but also of "CohesiveProperties".
+
+=== Licence ===
+
+This ontology is licenced under GPL v.3 licence.
+
+**Please note that other licence forms are also available on request.**
